@@ -23,6 +23,8 @@ tomcat::setup { "tomcat":
   tmpdir => "/tmp/",
   install_mode => "custom",
   data_source => "yes",
+  users => "yes",
+  access_log => "yes",
   direct_start => "yes"
   }
 
@@ -30,7 +32,11 @@ tomcat::deploy { "deploy":
   war_name => "sample",
   war_versioned => "no",
   war_version => "",
-  deploy_path => "/webapps/",
+  deploy_path => "/release/",
+  context => "/example",
+  external_conf => "yes",
+  external_dir => "report/",
+  external_conf_path => "",
   family => "7",
   update_version => "55",
   installdir => "/opt/",
