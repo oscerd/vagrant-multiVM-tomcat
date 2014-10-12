@@ -96,7 +96,7 @@ After settings let's take a look to `/manifests/server1.pp`:
 
 ```
 
-and now to to `/manifests/server2.pp`:
+and now to `/manifests/server2.pp`:
 
 ```puppet
 
@@ -305,12 +305,20 @@ In both the manifest files the Tomcat installation is set to _custom_ and we nee
 
 	  node_conf.vm.network "forwarded_port", guest: 8082, host: 9902
 
+	...
+	...
+	...
+
 	config.vm.define :server2 do |node_conf|
 	  vm_name= "server2"
 	  node_conf.vm.host_name = "#{vm_name}.farm"
 	  node_conf.vm.box = "puphpet/debian75-x64"
 
 	  node_conf.vm.network "forwarded_port", guest: 8082, host: 9903
+
+	...
+	...
+	...
 ```
 
 For more information about customization of Tomcat module see: __https://github.com/oscerd/puppet-tomcat-module__
