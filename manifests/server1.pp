@@ -34,8 +34,11 @@ tomcat::setup { "tomcat":
   tmpdir => "/tmp/",
   install_mode => "custom",
   data_source => "no",
+  driver_db => "no",
+  ssl => "no",
   users => "yes",
-  access_log => "no",
+  access_log => "yes",
+  as_service => "yes",
   direct_start => "yes"
   }
 
@@ -45,6 +48,7 @@ tomcat::deploy { "deploy":
   war_version => "",
   deploy_path => "/release/",
   context => "/sample",
+  symbolic_link => "",
   external_conf => "no",
   external_dir => "",
   external_conf_path => "",
@@ -52,5 +56,8 @@ tomcat::deploy { "deploy":
   update_version => "55",
   installdir => "/opt/",
   tmpdir => "/tmp/",
+  hot_deploy => "yes",
+  as_service => "yes",
+  direct_restart => "no",
   require => Tomcat::Setup["tomcat"]
   }

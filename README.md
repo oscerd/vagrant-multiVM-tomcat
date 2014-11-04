@@ -17,7 +17,7 @@ This machine contains:
 
  * The following box: https://vagrantcloud.com/puppetlabs/centos-6.5-64-puppet
  * The following box: https://vagrantcloud.com/puphpet/boxes/debian75-x64
- * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.3
+ * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.4
  * The puppet Java module: https://github.com/oscerd/puppet-java-module ver 1.0.1
 
 In the `/modules/tomcat/files` put the following files:
@@ -73,8 +73,11 @@ After settings let's take a look to `/manifests/server1.pp`:
 	  tmpdir => "/tmp/",
 	  install_mode => "custom",
 	  data_source => "no",
+	  driver_db => "no",
+	  ssl => "no",
 	  users => "yes",
-	  access_log => "no",
+	  access_log => "yes",
+	  as_service => "yes",
 	  direct_start => "yes"
 	  }
 
@@ -84,6 +87,7 @@ After settings let's take a look to `/manifests/server1.pp`:
 	  war_version => "",
 	  deploy_path => "/release/",
 	  context => "/sample",
+	  symbolic_link => "",
 	  external_conf => "no",
 	  external_dir => "",
 	  external_conf_path => "",
@@ -91,6 +95,9 @@ After settings let's take a look to `/manifests/server1.pp`:
 	  update_version => "55",
 	  installdir => "/opt/",
 	  tmpdir => "/tmp/",
+	  hot_deploy => "yes",
+	  as_service => "yes",
+	  direct_restart => "no",
 	  require => Tomcat::Setup["tomcat"]
 	  }
 
@@ -136,8 +143,11 @@ and now to `/manifests/server2.pp`:
 	  tmpdir => "/tmp/",
 	  install_mode => "custom",
 	  data_source => "no",
+	  driver_db => "no",
+	  ssl => "no",
 	  users => "yes",
-	  access_log => "no",
+	  access_log => "yes",
+	  as_service => "yes",
 	  direct_start => "yes"
 	  }
 
@@ -147,6 +157,7 @@ and now to `/manifests/server2.pp`:
 	  war_version => "",
 	  deploy_path => "/release/",
 	  context => "/context",
+	  symbolic_link => "",
 	  external_conf => "no",
 	  external_dir => "",
 	  external_conf_path => "",
@@ -154,6 +165,9 @@ and now to `/manifests/server2.pp`:
 	  update_version => "55",
 	  installdir => "/opt/",
 	  tmpdir => "/tmp/",
+	  hot_deploy => "yes",
+	  as_service => "yes",
+	  direct_restart => "no",
 	  require => Tomcat::Setup["tomcat"]
 	  }
 
@@ -196,6 +210,7 @@ in `/hiera/server1.data_source.yaml` there are the parameters to customize data 
 	tomcat::data_source::ds_host: 192.168.52.128
 	tomcat::data_source::ds_port: 1521
 	tomcat::data_source::ds_service: example
+	tomcat::data_source::ds_drivername: ojdbc6.jar
 ```
 
 in `/hiera/server1.configuration.yaml` there are the parameters to customize port and web repository:
@@ -208,6 +223,8 @@ in `/hiera/server1.configuration.yaml` there are the parameters to customize por
 	tomcat::params::shutdown_port: 8001
 	tomcat::params::http_connection_timeout: 20000
 	tomcat::params::https_max_threads: 150
+	tomcat::params::https_keystore: keystore
+	tomcat::params::https_keystore_pwd: password
 	tomcat::params::web_repository: http://apache.fastbull.org/tomcat/
 
 ```
@@ -253,6 +270,7 @@ in `/hiera/server2.data_source.yaml` there are the parameters to customize data 
 	tomcat::data_source::ds_host: 192.168.52.128
 	tomcat::data_source::ds_port: 1521
 	tomcat::data_source::ds_service: example
+	tomcat::data_source::ds_drivername: ojdbc6.jar
 ```
 
 in `/hiera/server2.configuration.yaml` there are the parameters to customize port and web repository:
@@ -265,6 +283,8 @@ in `/hiera/server2.configuration.yaml` there are the parameters to customize por
 	tomcat::params::shutdown_port: 8001
 	tomcat::params::http_connection_timeout: 20000
 	tomcat::params::https_max_threads: 150
+	tomcat::params::https_keystore: keystore
+	tomcat::params::https_keystore_pwd: password
 	tomcat::params::web_repository: http://apache.fastbull.org/tomcat/
 
 ```
