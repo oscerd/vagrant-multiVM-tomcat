@@ -17,7 +17,7 @@ This machine contains:
 
  * The following box: https://vagrantcloud.com/puppetlabs/centos-6.5-64-puppet
  * The following box: https://vagrantcloud.com/puphpet/boxes/debian75-x64
- * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.4
+ * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.5
  * The puppet Java module: https://github.com/oscerd/puppet-java-module ver 1.0.1
 
 In the `/modules/tomcat/files` put the following files:
