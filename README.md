@@ -15,9 +15,9 @@ Settings
 
 This machine contains:
 
- * The following box: https://vagrantcloud.com/puppetlabs/centos-6.5-64-puppet
- * The following box: https://vagrantcloud.com/puphpet/boxes/debian75-x64
- * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.5
+ * The following box: https://atlas.hashicorp.com/alphainternational/boxes/centos-6.5-x64
+ * The following box: https://atlas.hashicorp.com/cargomedia/boxes/debian-7-amd64-default
+ * The puppet Tomcat module: https://github.com/oscerd/puppet-tomcat-module ver 1.0.6
  * The puppet Java module: https://github.com/oscerd/puppet-java-module ver 1.0.1
 
 In the `/modules/tomcat/files` put the following files:
@@ -321,7 +321,7 @@ In both the manifest files the Tomcat installation is set to _custom_ and we nee
 	config.vm.define :server1 do |node_conf|
 	  vm_name= "server1"
 	  node_conf.vm.host_name = "#{vm_name}.farm"
-	  node_conf.vm.box = "puppetlabs/centos-6.5-64-puppet"
+	  node_conf.vm.box = "alphainternational/centos-6.5-x64"
 
 	  node_conf.vm.network "forwarded_port", guest: 8082, host: 9902
 
@@ -332,7 +332,7 @@ In both the manifest files the Tomcat installation is set to _custom_ and we nee
 	config.vm.define :server2 do |node_conf|
 	  vm_name= "server2"
 	  node_conf.vm.host_name = "#{vm_name}.farm"
-	  node_conf.vm.box = "puphpet/debian75-x64"
+	  node_conf.vm.box = "cargomedia/debian-7-amd64-default"
 
 	  node_conf.vm.network "forwarded_port", guest: 8082, host: 9903
 
