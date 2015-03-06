@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 config.vm.define :server1 do |node_conf|
   vm_name= "server1"
   node_conf.vm.host_name = "#{vm_name}.farm"
-  node_conf.vm.box = "puppetlabs/centos-6.5-64-puppet"
+  node_conf.vm.box = "alphainternational/centos-6.5-x64"
 
   node_conf.vm.network "forwarded_port", guest: 8082, host: 9902
 
@@ -28,7 +28,7 @@ config.vm.define :server1 do |node_conf|
 config.vm.define :server2 do |node_conf|
   vm_name= "server2"
   node_conf.vm.host_name = "#{vm_name}.farm"
-  node_conf.vm.box = "puphpet/debian75-x64"
+  node_conf.vm.box = "cargomedia/debian-7-amd64-default"
 
   node_conf.vm.network "forwarded_port", guest: 8082, host: 9903
 
